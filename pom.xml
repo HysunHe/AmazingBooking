@@ -51,6 +51,9 @@
 		<cglib.version>2.2.2</cglib.version>
 		
 		<common.version>1.4</common.version>
+        
+        <poi.version>3.12</poi.version>
+        <poi.ooxml.version>3.12</poi.ooxml.version>
 	</properties>
 
 	<dependencies>
@@ -363,6 +366,20 @@
 			<artifactId>jsoup</artifactId>
 			<version>${jsoup.version}</version>
 		</dependency>
+
+        <!-- poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+
+        <!-- poi-ooxml -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.ooxml.version}</version>
+        </dependency>
 	</dependencies>
 
 	<build>
