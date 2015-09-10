@@ -73,32 +73,6 @@ public class Main {
 	}
 
 	/**
-	 * @param args
-	 * @throws Exception
-	 */
-	public static void main(String[] args) {
-		final Properties props = loadConfiguration();
-		while (true) {
-			System.out.println("* Checking new mails...");
-			try {
-				List<MailContent> mails = listenAndParse(props);
-				System.out.println("* New orders to be generated: "
-						+ mails.size());
-				// TODO: Generate a new order for each mail.
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			try {
-				Thread.sleep(15 * 1000L);
-			} catch (InterruptedException e) {
-				System.err.println("! Main thread is interrupted.");
-				System.exit(1);
-			}
-		}
-	}
-
-	/**
 	 * @param props
 	 * @throws Exception
 	 */
@@ -138,5 +112,31 @@ public class Main {
 		store.close();
 
 		return mails;
+	}
+
+	/**
+	 * @param args
+	 * @throws Exception
+	 */
+	public static void main(String[] args) {
+		final Properties props = loadConfiguration();
+		while (true) {
+			System.out.println("* Checking new mails...");
+			try {
+				List<MailContent> mails = listenAndParse(props);
+				System.out.println("* New orders to be generated: "
+						+ mails.size());
+				// TODO: Generate a new order for each mail.
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			try {
+				Thread.sleep(15 * 1000L);
+			} catch (InterruptedException e) {
+				System.err.println("! Main thread is interrupted.");
+				System.exit(1);
+			}
+		}
 	}
 }
