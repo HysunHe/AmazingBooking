@@ -7,13 +7,15 @@
  *
  ***************************************************************************/
 
-package com.ai.hackathon.amazingbooking.utils;
+package com.ai.hackathon.amazingbooking.parser;
+
+import com.ai.hackathon.amazingbooking.pojo.MailContent;
 
 /***************************************************************************
  * <PRE>
  *  Project Name    : AmazingBooking
  * 
- *  Package Name    : com.ai.hackathon.amazingbooking.utils
+ *  Package Name    : com.ai.hackathon.amazingbooking.parser
  * 
  *  File Name       : MailParser.java
  * 
@@ -28,8 +30,6 @@ package com.ai.hackathon.amazingbooking.utils;
  * 
  * </PRE>
  ***************************************************************************/
-public final class MailParser {
-	public static void main(String[] args) {
-		System.out.println("Hello");
-	}
+public interface MailParser {
+	MailContent parse();
 }
