@@ -27,8 +27,10 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 
+import com.ai.commons.DateUtils;
 import com.ai.commons.StringUtils;
 import com.ai.hackathon.amazingbooking.bean.MailContent;
+import com.ai.hackathon.amazingbooking.utils.FileUtil;
 
 /***************************************************************************
  * <PRE>
@@ -71,8 +73,12 @@ public class POP3MailParser implements MailParser {
 		String from = address[0].getAddress();
 		String personal = address[0].getPersonal();
 		String fromAddr = "";
-		if (personal != null || from != null) {
+		if (personal != null && from != null) {
 			fromAddr = personal + "<" + from + ">";
+		} else if (personal == null) {
+			fromAddr = from;
+		} else {
+			fromAddr = personal;
 		}
 		return fromAddr;
 	}
@@ -229,7 +235,10 @@ public class POP3MailParser implements MailParser {
 			return null;
 		}
 
-		String storeDir = props.getProperty("file.temp.dir");
+		String storeDir = props.getProperty("file.temp.dir") + File.separator
+				+ DateUtils.date2String(DateUtils.now(), "yyyyMMddHHmmssSSS");
+		FileUtil.mkdirs(storeDir);
+
 		String filePath = storeDir + File.separator + fileName;
 		File storeFile = new File(filePath);
 
