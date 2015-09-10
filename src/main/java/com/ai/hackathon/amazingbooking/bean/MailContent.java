@@ -36,6 +36,8 @@ public class MailContent implements Serializable {
 	private static final long serialVersionUID = -5716224663256493315L;
 
 	private String from;
+	private String senderMail;
+	private String senderName;
 	private String to;
 	private String cc;
 	private String bcc;
@@ -162,6 +164,36 @@ public class MailContent implements Serializable {
 	 */
 	public void setBcc(String bcc) {
 		this.bcc = bcc;
+	}
+
+	/**
+	 * @return the senderMail
+	 */
+	public String getSenderMail() {
+		return senderMail;
+	}
+
+	/**
+	 * @param senderMail
+	 *            the senderMail to set
+	 */
+	public void setSenderMail(String senderMail) {
+		this.senderMail = senderMail;
+	}
+
+	/**
+	 * @return the senderName
+	 */
+	public String getSenderName() {
+		return senderName;
+	}
+
+	/**
+	 * @param senderName
+	 *            the senderName to set
+	 */
+	public void setSenderName(String senderName) {
+		this.senderName = senderName;
 	}
 
 	/*

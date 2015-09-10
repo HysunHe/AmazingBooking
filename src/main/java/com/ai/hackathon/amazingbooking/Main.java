@@ -9,9 +9,12 @@
 
 package com.ai.hackathon.amazingbooking;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Flags;
@@ -22,10 +25,15 @@ import javax.mail.Store;
 import javax.mail.internet.MimeMessage;
 import javax.mail.search.FlagTerm;
 
+import org.apache.commons.lang.StringUtils;
+
+import com.ai.consts.MailConstant;
 import com.ai.hackathon.amazingbooking.bean.MailContent;
 import com.ai.hackathon.amazingbooking.consts.Consts;
 import com.ai.hackathon.amazingbooking.parser.MailParser;
 import com.ai.hackathon.amazingbooking.parser.POP3MailParser;
+import com.ai.userservice.common.bean.ServiceCallResult;
+import com.ai.userservice.common.util.HttpUtil;
 
 /***************************************************************************
  * <PRE>
@@ -115,22 +123,85 @@ public class Main {
 	}
 
 	/**
+	 * @param origMail
+	 * @param orderNo
+	 */
+	private static void sendSuccessMail(Properties props, MailContent origMail,
+			String orderNo) {
+		final String service = props.getProperty("mail.service.url")
+				+ "/mailx/send-html";
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put(MailConstant.API.TO, origMail.getSenderMail());
+		if (StringUtils.isNotEmpty(origMail.getSenderName())) {
+			params.put(MailConstant.API.SENDER_NAME, origMail.getSenderName());
+		}
+		if (StringUtils.isNotEmpty(origMail.getCc())) {
+			params.put(MailConstant.API.CC, origMail.getCc().split("\\,"));
+		}
+		params.put(MailConstant.API.DESCRIPTION,
+				"Our system successfully placed the order " + orderNo
+						+ " for you.");
+		params.put(MailConstant.API.SUBJECT, "Your new order " + orderNo);
+		params.put(MailConstant.API.TEXT_BODY,
+				"Your client does not support for html format mail!");
+		params.put("RUN_IMMEDIATELY", Boolean.TRUE);
+		params.put("DISCARD_ON_FAIL", Boolean.TRUE);
+		String bodyHtml = "Dear Mr. ABC"
+				+ " <p>Our AmazingBooking system has successfully placed the order for you, the order number is "
+				+ orderNo + "</p>" + "<p>Thanks for using our service,</p>"
+				+ "<p><B>The Amazing Hackathon Team</B></p>";
+		params.put("HTML_BODY", bodyHtml);
+
+		try {
+			ServiceCallResult result = HttpUtil.issuePostRequest(service, null,
+					params);
+			if (200 == result.getStatusCode() || 202 == result.getStatusCode()) {
+				System.out
+						.println("* Notification mail has been sent successfully.");
+			} else {
+				System.err.println("ERROR: " + result);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @param origMail
+	 * @return
+	 */
+	private static String placeOrder(MailContent origMail) {
+		String orderNo = "TODO";
+		return orderNo;
+	}
+
+	/**
 	 * @param args
 	 * @throws Exception
 	 */
 	public static void main(String[] args) {
 		final Properties props = loadConfiguration();
 		while (true) {
-			System.out.println("* Checking new mails...");
+			System.out.println("* Checking new order request...");
+
 			try {
+				// Check if there are new order request (by mail)
 				List<MailContent> mails = listenAndParse(props);
-				System.out.println("* New orders to be generated: "
-						+ mails.size());
-				// TODO: Generate a new order for each mail.
+				System.out.println("* New Request Received: " + mails.size());
+
+				for (MailContent mail : mails) {
+					// Generate an new order and add it to Oracle DB.
+					String orderNo = placeOrder(mail);
+
+					// Send notification mail to client.
+					sendSuccessMail(props, mail, orderNo);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
+			// Sleep for 15 seconds before the next checking.
 			try {
 				Thread.sleep(15 * 1000L);
 			} catch (InterruptedException e) {

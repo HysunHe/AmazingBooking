@@ -84,6 +84,26 @@ public class POP3MailParser implements MailParser {
 	}
 
 	/**
+	 * @return
+	 * @throws Exception
+	 */
+	private String getSender() throws Exception {
+		InternetAddress address[] = (InternetAddress[]) mimeMessage.getFrom();
+		String personal = address[0].getPersonal();
+		return personal;
+	}
+
+	/**
+	 * @return
+	 * @throws Exception
+	 */
+	private String getSenderMail() throws Exception {
+		InternetAddress address[] = (InternetAddress[]) mimeMessage.getFrom();
+		String fromMail = address[0].getAddress();
+		return fromMail;
+	}
+
+	/**
 	 * @param type
 	 * @return
 	 * @throws Exception
@@ -113,12 +133,7 @@ public class POP3MailParser implements MailParser {
 			if (emailAddr != null) {
 				emailAddr = MimeUtility.decodeText(emailAddr);
 			}
-			String personal = address[i].getPersonal();
-			if (personal != null) {
-				personal = MimeUtility.decodeText(personal);
-			}
-			String compositeto = personal + "<" + emailAddr + ">";
-			mailAddr += "," + compositeto;
+			mailAddr += "," + emailAddr;
 		}
 		return mailAddr.substring(1);
 	}
@@ -276,6 +291,8 @@ public class POP3MailParser implements MailParser {
 	public MailContent parse() {
 		try {
 			String from = this.getFrom();
+			String sender = this.getSender();
+			String senderMail = this.getSenderMail();
 			String to = this.getMailAddress("TO");
 			String cc = this.getMailAddress("CC");
 			String bcc = this.getMailAddress("BCC");
@@ -286,6 +303,8 @@ public class POP3MailParser implements MailParser {
 
 			MailContent mailObject = new MailContent();
 			mailObject.setFrom(from);
+			mailObject.setSenderName(sender);
+			mailObject.setSenderMail(senderMail);
 			mailObject.setSubject(subject);
 			mailObject.setSentDate(sentDate);
 			mailObject.setTo(to);
