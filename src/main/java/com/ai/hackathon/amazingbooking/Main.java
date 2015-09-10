@@ -10,6 +10,8 @@
 package com.ai.hackathon.amazingbooking;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Flags;
@@ -74,11 +76,36 @@ public class Main {
 	 * @param args
 	 * @throws Exception
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		final Properties props = loadConfiguration();
+		while (true) {
+			System.out.println("* Checking new mails...");
+			try {
+				List<MailContent> mails = listenAndParse(props);
+				System.out.println("* New orders to be generated: "
+						+ mails.size());
+				// TODO: Generate a new order for each mail.
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			try {
+				Thread.sleep(15 * 1000L);
+			} catch (InterruptedException e) {
+				System.err.println("! Main thread is interrupted.");
+				System.exit(1);
+			}
+		}
+	}
+
+	/**
+	 * @param props
+	 * @throws Exception
+	 */
+	public static List<MailContent> listenAndParse(Properties props)
+			throws Exception {
 		Session session = Session.getDefaultInstance(props);
 		session.setDebug(false);
-
 		Store store = session.getStore("imap");
 		store.connect(props.getProperty("mail.server"),
 				props.getProperty("mail.user"),
@@ -90,23 +117,26 @@ public class Main {
 				Flags.Flag.SEEN), false));
 		System.out.println("* Got unread messages: " + messages.length);
 
+		final List<MailContent> mails = new ArrayList<>();
 		for (int i = 0; i < messages.length; i++) {
 			MimeMessage mimeMessage = (MimeMessage) messages[i];
 			String subject = mimeMessage.getSubject();
-			System.out.println("* Got mail / subject: " + subject);
-
-			if (subject != null
-					&& subject.toUpperCase().contains(Consts.SUBJECT_KEYWORD)) {
-				MailParser mailParser = new POP3MailParser(mimeMessage, props);
-				MailContent mailObject = mailParser.parse();
+			if (subject == null
+					|| !subject.toUpperCase().contains(Consts.SUBJECT_KEYWORD)) {
+				continue;
+			}
+			MailParser mailParser = new POP3MailParser(mimeMessage, props);
+			MailContent mailObject = mailParser.parse();
+			if (mailObject != null) {
+				mails.add(mailObject);
 				System.out.println("* Got mail: " + mailObject);
 			}
-
 			MimeMessage copy = new MimeMessage(mimeMessage);
 			System.out.println("* Mark the mail as read: " + copy.getSubject());
 		}
-
 		inbox.close(false);
 		store.close();
+
+		return mails;
 	}
 }
