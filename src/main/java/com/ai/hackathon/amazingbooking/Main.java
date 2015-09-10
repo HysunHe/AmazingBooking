@@ -138,9 +138,8 @@ public class Main {
 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(MailConstant.API.TO, origMail.getSenderMail().split("\\,"));
-		if (StringUtils.isNotEmpty(origMail.getSenderName())) {
-			params.put(MailConstant.API.SENDER_NAME, origMail.getSenderName());
-		}
+		params.put(MailConstant.API.SENDER_NAME, "AmazingBooking System");
+
 		if (StringUtils.isNotEmpty(origMail.getCc())) {
 			params.put(MailConstant.API.CC, origMail.getCc().split("\\,"));
 		}
