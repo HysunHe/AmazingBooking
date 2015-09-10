@@ -91,7 +91,7 @@ public class Main {
 		System.out.println("* Got unread messages: " + messages.length);
 
 		for (int i = 0; i < messages.length; i++) {
-			MimeMessage mimeMessage = new MimeMessage((MimeMessage) messages[i]);
+			MimeMessage mimeMessage = (MimeMessage) messages[i];
 			String subject = mimeMessage.getSubject();
 			System.out.println("* Got mail / subject: " + subject);
 
@@ -100,8 +100,10 @@ public class Main {
 				MailParser mailParser = new POP3MailParser(mimeMessage, props);
 				MailContent mailObject = mailParser.parse();
 				System.out.println("* Got mail: " + mailObject);
-				break;
 			}
+
+			MimeMessage copy = new MimeMessage(mimeMessage);
+			System.out.println("* Mark the mail as read: " + copy.getSubject());
 		}
 
 		inbox.close(false);
