@@ -31,10 +31,11 @@ public final class DBUtil {
 		Connection conn = null;
 
 		try {
+			Class.forName(dbDriver);
 			conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
 
 			log.debug("connection:" + conn);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			log.error("Error:", e);
 		}
 
@@ -69,37 +70,37 @@ public final class DBUtil {
 
 		return dataSource;
 	}
-	
-    public static void close(Connection conn) {
-        try {
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException e) {
-            log.error("Error:", e);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                log.error("Error:", e);
-            }
-        }
-    }
-    
-    public static void close(Statement stat) {
-        try {
-            if (stat != null) {
-                stat.close();
-            }
-        } catch (SQLException e) {
-            log.error("Error:", e);
-        } finally {
-            try {
-                stat.close();
-            } catch (SQLException e) {
-                log.error("Error:", e);
-            }
-        }
-    }
+
+	public static void close(Connection conn) {
+		try {
+			if (conn != null) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			log.error("Error:", e);
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				log.error("Error:", e);
+			}
+		}
+	}
+
+	public static void close(Statement stat) {
+		try {
+			if (stat != null) {
+				stat.close();
+			}
+		} catch (SQLException e) {
+			log.error("Error:", e);
+		} finally {
+			try {
+				stat.close();
+			} catch (SQLException e) {
+				log.error("Error:", e);
+			}
+		}
+	}
 
 }
