@@ -9,8 +9,11 @@
 
 package com.ai.hackathon.amazingbooking;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,9 +32,12 @@ import org.apache.commons.lang.StringUtils;
 
 import com.ai.consts.MailConstant;
 import com.ai.hackathon.amazingbooking.bean.MailContent;
+import com.ai.hackathon.amazingbooking.bean.OrderBean;
 import com.ai.hackathon.amazingbooking.consts.Consts;
+import com.ai.hackathon.amazingbooking.dao.OrderDao;
 import com.ai.hackathon.amazingbooking.parser.MailParser;
 import com.ai.hackathon.amazingbooking.parser.POP3MailParser;
+import com.ai.hackathon.amazingbooking.utils.OrderUtils;
 import com.ai.userservice.common.bean.ServiceCallResult;
 import com.ai.userservice.common.util.HttpUtil;
 
@@ -170,11 +176,22 @@ public class Main {
 	/**
 	 * @param origMail
 	 * @return
+	 * @throws IOException 
+	 * @throws SQLException 
 	 */
-	private static String placeOrder(MailContent origMail) {
-		String orderNo = "TODO";
-		return orderNo;
-	}
+    private static String placeOrder(MailContent origMail) throws IOException,
+            SQLException {
+        String orderNo = "TODO";
+
+        String[] attachments = origMail.getAttachments();
+        InputStream is = new FileInputStream(attachments[0]);
+        OrderBean orderBean = OrderUtils.toOrderBean(is);
+
+        OrderDao orderDao = new OrderDao();
+        orderNo = orderDao.save(orderBean);
+
+        return orderNo;
+    }
 
 	/**
 	 * @param args

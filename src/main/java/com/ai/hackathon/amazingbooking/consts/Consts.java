@@ -34,6 +34,11 @@ import com.google.common.base.Objects;
 
 public final class Consts {
 	public static final String SUBJECT_KEYWORD = "QUICK BOOK ORDER THRU MAIL";
+	
+	public static final String INSERT_ORDER_GENERAL_INFO = "INSERT_ORDER_GENERAL_INFO";
+	public static final String INSERT_ORDER_EXT_FIELDS = "INSERT_ORDER_EXT_FIELDS";
+	public static final String INSERT_ORDER_FACTORY = "INSERT_ORDER_FACTORY";
+	
 
 	public enum OrderField {
 		CLIENT_REF_NB("CLIENT_REF_NB"), EXPECTED_INSP_DATE("EXPECTED_INSP_DATE"), EXPECTED_SHIP_DATE(

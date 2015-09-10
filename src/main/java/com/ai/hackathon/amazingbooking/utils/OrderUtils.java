@@ -47,8 +47,7 @@ import com.ai.hackathon.amazingbooking.consts.Consts.OrderField;
 
 public class OrderUtils {
 
-    public static OrderBean toOrderBean(InputStream is) throws IOException,
-            ParseException {
+    public static OrderBean toOrderBean(InputStream is) throws IOException {
         OrderBean orderBean = new OrderBean();
 
         Workbook wb = null;
@@ -83,25 +82,18 @@ public class OrderUtils {
     }
     
     private static OrderBean setProperty(OrderBean orderBean,
-            OrderField orderField, Cell cell) throws ParseException {
+            OrderField orderField, Cell cell) {
         switch (orderField) {
         case CLIENT_REF_NB:
             orderBean.setClientRefNb(getCellValue(cell));
             break;
 
         case EXPECTED_INSP_DATE:
-//            Date expectedInspDate = DateUtils.parseDate(value,
-//                    new String[] { DateUtils.Format.SAMPLE_INSP_DATE_FORMAT
-//                            .getValue() });
             orderBean.setExpectedInspDate(cell.getDateCellValue());
             break;
 
         case EXPECTED_SHIP_DATE:
-//            Date expectedShipDate = DateUtils.parseDate(value,
-//                    new String[] { DateUtils.Format.SAMPLE_INSP_DATE_FORMAT
-//                            .getValue() });
             orderBean.setExpectedShipDate(cell.getDateCellValue());
-            ;
             break;
 
         case VENDOR_NAME:
@@ -244,6 +236,5 @@ public class OrderUtils {
 
         return value;
     }
-
     
 }
