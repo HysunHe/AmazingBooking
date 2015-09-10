@@ -20,9 +20,9 @@ import javax.mail.Store;
 import javax.mail.internet.MimeMessage;
 import javax.mail.search.FlagTerm;
 
+import com.ai.hackathon.amazingbooking.bean.MailContent;
 import com.ai.hackathon.amazingbooking.parser.MailParser;
 import com.ai.hackathon.amazingbooking.parser.POP3MailParser;
-import com.ai.hackathon.amazingbooking.pojo.MailContent;
 
 /***************************************************************************
  * <PRE>

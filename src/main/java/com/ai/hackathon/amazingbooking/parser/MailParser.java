@@ -9,7 +9,7 @@
 
 package com.ai.hackathon.amazingbooking.parser;
 
-import com.ai.hackathon.amazingbooking.pojo.MailContent;
+import com.ai.hackathon.amazingbooking.bean.MailContent;
 
 /***************************************************************************
  * <PRE>

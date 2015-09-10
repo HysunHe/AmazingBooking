@@ -28,7 +28,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 
 import com.ai.commons.StringUtils;
-import com.ai.hackathon.amazingbooking.pojo.MailContent;
+import com.ai.hackathon.amazingbooking.bean.MailContent;
 
 /***************************************************************************
  * <PRE>

@@ -7,7 +7,7 @@
  *
  ***************************************************************************/
 
-package com.ai.hackathon.amazingbooking.pojo;
+package com.ai.hackathon.amazingbooking.bean;
 
 import java.io.Serializable;
 import java.util.Arrays;
