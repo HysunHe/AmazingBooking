@@ -98,7 +98,7 @@ public class OrderDao {
 		try {
 			pstat = conn.prepareStatement(SqlConfigLoader
 					.findSql(Consts.INSERT_ORDER_GENERAL_INFO));
-			pstat.setString(i++, StringUtils.EMPTY); // STATUS
+			pstat.setString(i++, "20"); // STATUS
 			pstat.setString(i++, orderBean.getOrderNo()); // ORDER_NUMBER
 			pstat.setString(i++, orderBean.getClientRefNb()); // CLIENT_REF_NB
 			pstat.setString(i++, StringUtils.EMPTY); // ORDER_PLACER
@@ -144,7 +144,7 @@ public class OrderDao {
 			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_CALLED_BY
 			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_CALL_RESULT
 			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_CALL_COMMENTS
-			pstat.setString(i++, StringUtils.EMPTY); // CUST_ID
+			pstat.setString(i++, orderBean.getCustId()); // CUST_ID
 
 			pstat.execute();
 		} finally {
