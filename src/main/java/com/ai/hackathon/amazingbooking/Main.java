@@ -193,7 +193,25 @@ public class Main {
 	private static OrderBean placeOrder(Properties props, MailContent origMail)
 			throws IOException, SQLException {
 		String[] attachments = origMail.getAttachments();
-		InputStream is = new FileInputStream(attachments[0]);
+		
+		
+        String fileName = com.ai.commons.StringUtils.EMPTY;
+        for (String attachment : attachments) {
+            if (com.ai.commons.StringUtils.isBlank(attachment)) {
+                continue;
+            }
+
+            fileName = attachment.toUpperCase();
+
+            if (com.ai.commons.StringUtils.endsWith(fileName, ".XLSX")
+                    && com.ai.commons.StringUtils.contains(fileName,
+                            "QUICK BOOKING")) {
+                fileName = attachment;
+                break;
+            }
+        }
+        
+        InputStream is = new FileInputStream(fileName);
 		OrderBean orderBean = OrderUtils.toOrderBean(is);
 
 		System.out.println("* Got javabean: " + orderBean);
