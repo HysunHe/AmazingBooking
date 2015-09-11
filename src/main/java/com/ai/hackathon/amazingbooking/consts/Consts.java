@@ -34,19 +34,19 @@ import com.google.common.base.Objects;
 
 public final class Consts {
 	public static final String SUBJECT_KEYWORD = "QUICK BOOK ORDER THRU MAIL";
-	
+
 	public static final String INSERT_ORDER_GENERAL_INFO = "INSERT_ORDER_GENERAL_INFO";
 	public static final String INSERT_ORDER_EXT_FIELDS = "INSERT_ORDER_EXT_FIELDS";
 	public static final String INSERT_ORDER_FACTORY = "INSERT_ORDER_FACTORY";
 	public static final String INSERT_PRODUCT = "INSERT_PRODUCT";
 	public static final String INSERT_SUPPLIER = "INSERT_SUPPLIER";
-    public static final String INSERT_ORDER_MAN_DAY = "INSERT_ORDER_MAN_DAY";
-    public static final String INSERT_ORDER_CHARGE = "INSERT_ORDER_CHARGE";	
-    public static final String INSERT_PAYMNET = "INSERT_PAYMNET";	
-    public static final String INSERT_PROD_EXT = "INSERT_PROD_EXT";	
-    public static final String INSERT_PROD_SPEC = "INSERT_PROD_SPEC";	
-    public static final String INSERT_ORDER_PROD_SAMPLE = "INSERT_ORDER_PROD_SAMPLE";
-	
+	public static final String INSERT_ORDER_MAN_DAY = "INSERT_ORDER_MAN_DAY";
+	public static final String INSERT_ORDER_CHARGE = "INSERT_ORDER_CHARGE";
+	public static final String INSERT_PAYMNET = "INSERT_PAYMNET";
+	public static final String INSERT_PROD_EXT = "INSERT_PROD_EXT";
+	public static final String INSERT_PROD_SPEC = "INSERT_PROD_SPEC";
+	public static final String INSERT_ORDER_PROD_SAMPLE = "INSERT_ORDER_PROD_SAMPLE";
+	public static final String INSERT_PROD_CKL = "INSERT_PROD_CKL";
 
 	public enum OrderField {
 		CLIENT_REF_NB("CLIENT_REF_NB"), EXPECTED_INSP_DATE("EXPECTED_INSP_DATE"), EXPECTED_SHIP_DATE(

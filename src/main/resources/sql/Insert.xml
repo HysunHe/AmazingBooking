@@ -463,5 +463,37 @@
         )
     ]]></sql>         
     
-    
+ 	<sql name="INSERT_PROD_CKL"><![CDATA[
+        INSERT INTO ORDER_PROD_CHECKLIST (
+            PRODUCT_ID,
+            IP_TEMPLATE,
+            CLIENT_CHECKLIST_ID,
+            CHECKLIST_NUMBER,
+            PROD_SAMPLE_LEVEL,
+			PROD_SAMPLE_SIZE,
+			PROD_MEASUREMENT_SAMPLE_SIZE,
+			PROD_MD,
+            AQL_TYPE,
+            AQL_CRITICAL,
+            AQL_MAJOR,
+			AQL_MINOR,
+            CREATE_TIME,
+            UPDATE_TIME
+        ) VALUES (
+            ?,
+            'Mr Price Garment-SL-Garments-PSI', 
+            '41AFC33EFB747A65482577290028218C',
+            'AI-WP-TX-01A',
+            'II',
+            80,
+            10,
+            3,
+            'Standard',
+            ?,
+            ?,
+            ?,
+            ?,
+            ?          
+        )
+    ]]></sql>    
 </sql-config>

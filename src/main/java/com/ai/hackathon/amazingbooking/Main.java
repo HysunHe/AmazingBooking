@@ -107,7 +107,7 @@ public class Main {
 			MimeMessage mimeMessage = (MimeMessage) messages[i];
 			String subject = mimeMessage.getSubject();
 			System.out.println("* Find mail with subject: " + subject);
-			
+
 			MimeMessage copy = new MimeMessage(mimeMessage);
 			System.out.println("* Mark the mail as read: " + copy.getSubject());
 
@@ -151,7 +151,7 @@ public class Main {
 				"Your client does not support for html format mail!");
 		params.put("RUN_IMMEDIATELY", Boolean.TRUE);
 		params.put("DISCARD_ON_FAIL", Boolean.TRUE);
-		String bodyHtml = "Dear Mr. ABC"
+		String bodyHtml = "Dear Mr. Price"
 				+ " <p>Our AmazingBooking system has successfully placed the order for you, the order number is "
 				+ orderNo + "</p>" + "<p>Thanks for using our service,</p>"
 				+ "<p><B>The Amazing Hackathon Team</B></p>";
@@ -206,6 +206,10 @@ public class Main {
 			}
 		}
 
+		if (StringUtils.isBlank(fileName)) {
+			return null;
+		}
+
 		InputStream is = new FileInputStream(fileName);
 		OrderBean orderBean = OrderUtils.toOrderBean(is);
 
@@ -236,7 +240,9 @@ public class Main {
 				for (MailContent mail : mails) {
 					// Generate an new order and add it to Oracle DB.
 					OrderBean orderBean = placeOrder(props, mail);
-
+					if (orderBean == null) {
+						continue;
+					}
 					// Send notification mail to client.
 					sendSuccessMail(props, mail, orderBean.getOrderNo());
 				}
@@ -246,7 +252,7 @@ public class Main {
 
 			// Sleep for 15 seconds before the next checking.
 			try {
-				Thread.sleep(15 * 1000L);
+				Thread.sleep(10 * 1000L);
 			} catch (InterruptedException e) {
 				System.err.println("! Main thread is interrupted.");
 				System.exit(1);
