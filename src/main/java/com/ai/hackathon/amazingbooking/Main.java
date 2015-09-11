@@ -37,6 +37,7 @@ import com.ai.hackathon.amazingbooking.dao.OrderDao;
 import com.ai.hackathon.amazingbooking.parser.MailParser;
 import com.ai.hackathon.amazingbooking.parser.POP3MailParser;
 import com.ai.hackathon.amazingbooking.utils.OrderUtils;
+import com.ai.hackathon.amazingbooking.utils.ServiceCallUtil;
 import com.ai.userservice.common.bean.ServiceCallResult;
 import com.ai.userservice.common.util.HttpUtil;
 
@@ -136,13 +137,16 @@ public class Main {
 		final String service = props.getProperty("mail.service.url")
 				+ "/mailx/send-html";
 
+		// TODO: Use mail template to eliminate hard coded info.
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(MailConstant.API.TO, origMail.getSenderMail().split("\\,"));
 		params.put(MailConstant.API.SENDER_NAME, "AmazingBooking System");
+		params.put(MailConstant.API.SENDER_MAIL, "noreply@asiainspection.com");
 
 		if (StringUtils.isNotEmpty(origMail.getCc())) {
 			params.put(MailConstant.API.CC, origMail.getCc().split("\\,"));
 		}
+
 		params.put(MailConstant.API.DESCRIPTION,
 				"Our system successfully placed the order " + orderNo
 						+ " for you.");
@@ -157,17 +161,26 @@ public class Main {
 				+ "<p><B>The Amazing Hackathon Team</B></p>";
 		params.put("HTML_BODY", bodyHtml);
 
-		try {
-			ServiceCallResult result = HttpUtil.issuePostRequest(service, null,
-					params);
-			if (200 == result.getStatusCode() || 202 == result.getStatusCode()) {
-				System.out
-						.println("* Notification mail has been sent successfully.");
-			} else {
-				System.err.println("ERROR: " + result);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		boolean success = ServiceCallUtil.callPost(service, params);
+		if (success) {
+			System.out.println("* Notification mail sent successfully.");
+		}
+	}
+
+	/**
+	 * @param props
+	 * @param orderBean
+	 */
+	private static void updatePriceInfo(Properties props, OrderBean orderBean) {
+		final String psiService = props.getProperty("inspection.service.url");
+		String orderId = null; // TODO
+
+		final String url = psiService
+				+ "/order/mix/calculate-price/{orderId}".replace("{orderId}",
+						orderId) + "?who=AmazingBookingSystem";
+		boolean success = ServiceCallUtil.callPost(url, null);
+		if (success) {
+			System.out.println("* Notification mail sent successfully.");
 		}
 	}
 
