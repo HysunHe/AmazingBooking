@@ -103,8 +103,8 @@ public class OrderDao {
 			pstat.setString(i++, orderBean.getClientRefNb()); // CLIENT_REF_NB
 			pstat.setString(i++, StringUtils.EMPTY); // ORDER_PLACER
 			pstat.setDate(i++, new Date(orderBean.getCreateTime().getTime())); // BOOKING_DATE
-			pstat.setString(i++, StringUtils.EMPTY); // SIC
-			pstat.setString(i++, StringUtils.EMPTY); // SERVICE_TYPE
+			pstat.setString(i++, "Nina"); // SIC
+			pstat.setString(i++, "1"); // SERVICE_TYPE
 			pstat.setString(i++, StringUtils.EMPTY); // PROD_CATEGORY_AI
 			pstat.setString(i++, StringUtils.EMPTY); // PROD_FAMILY_AI
 			pstat.setString(i++, StringUtils.EMPTY); // PROD_CATEGORY_CLIENT
@@ -126,7 +126,7 @@ public class OrderDao {
 			pstat.setString(i++, StringUtils.EMPTY); // LC_BENE_NAME
 			pstat.setString(i++, StringUtils.EMPTY); // LC_BENE_ADDRESS
 			pstat.setDate(i++, new Date(orderBean.getExpectedInspDate().getTime())); // EXPECTED_INSP_DATE
-			pstat.setNull(i++,  java.sql.Types.DATE); // ACTUAL_INSP_DATE
+			pstat.setDate(i++, new Date(orderBean.getExpectedInspDate().getTime())); // ACTUAL_INSP_DATE
 			pstat.setDate(i++, new Date(orderBean.getExpectedShipDate().getTime())); // EXPECTED_SHIP_DATE
 			pstat.setString(i++, StringUtils.EMPTY); // COPY_ALL_MAIL_TO
 			pstat.setString(i++, StringUtils.EMPTY); // COPY_REPORT_MAIL_TO
@@ -163,7 +163,7 @@ public class OrderDao {
 					.findSql(Consts.INSERT_ORDER_EXT_FIELDS));
 			pstat.setString(i++, orderBean.getOrderId()); // ORDER_ID
 			pstat.setString(i++, StringUtils.EMPTY); // PRODUCT_ID_LIST
-			pstat.setString(i++, StringUtils.EMPTY); // IS_RE_INSPECTION
+			pstat.setString(i++, com.ai.commons.Consts.YES); // IS_RE_INSPECTION
 			pstat.setString(i++, StringUtils.EMPTY); // ORIGINAL_NB_REINSP
 			pstat.setString(i++, StringUtils.EMPTY); // IS_SPLIT_FROM
 			pstat.setString(i++, StringUtils.EMPTY); // ORIGINAL_NB_SPLIT
@@ -307,9 +307,9 @@ public class OrderDao {
             pstat = conn.prepareStatement(SqlConfigLoader
                     .findSql(Consts.INSERT_ORDER_MAN_DAY));
             pstat.setString(1, orderBean.getOrderId()); // ORDER_ID
-            pstat.setString(2, StringUtils.EMPTY); // CLIENT_MD
-            pstat.setString(3, StringUtils.EMPTY); // SUPERVISOR_MD
-            pstat.setString(4, StringUtils.EMPTY); // REAL_MD
+            pstat.setString(2, "2"); // CLIENT_MD
+            pstat.setString(3, "3"); // SUPERVISOR_MD
+            pstat.setString(4, "2"); // REAL_MD
             pstat.setString(5, StringUtils.EMPTY); // MD_STATUS
             pstat.setDate(6, orderBean.getCreateTime()); // CREATE_TIME
             pstat.setDate(7, orderBean.getUpdateTime()); // UPDATE_TIME
