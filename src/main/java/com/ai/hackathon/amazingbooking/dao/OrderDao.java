@@ -66,6 +66,8 @@ public class OrderDao {
 			saveOrderExtFields(conn, orderBean);
 
 			saveOrderFactory(conn, orderBean);
+			
+			saveProduct(conn, orderBean);
 		} catch (SQLException e) {
 			conn.rollback();
 		} finally {
@@ -222,6 +224,34 @@ public class OrderDao {
 			pstat.setDate(25, orderBean.getCreateTime()); // CREATE_TIME
 			pstat.setDate(26, orderBean.getUpdateTime()); // UPDATE_TIME
 			pstat.setString(27, null); // FACTORY_ID
+
+			pstat.execute();
+		} finally {
+			DBUtil.close(pstat);
+		}
+	}
+
+	/**
+	 * @param conn
+	 * @param orderBean
+	 * @throws SQLException
+	 */
+	private void saveProduct(Connection conn, OrderBean orderBean)
+			throws SQLException {
+		PreparedStatement pstat = null;
+		orderBean.setProdId(IDGenerator.uuid());
+		try {
+			pstat = conn.prepareStatement(SqlConfigLoader
+					.findSql(Consts.INSERT_PRODUCT));
+			pstat.setString(1, orderBean.getProdId());
+			pstat.setString(2, orderBean.getOrderId());
+			pstat.setString(3, orderBean.getProdType());
+			pstat.setString(4, orderBean.getProdName());
+			pstat.setString(5, orderBean.getProdReference());
+			pstat.setString(6, orderBean.getProdQuantity());
+			pstat.setString(7, orderBean.getPoNumber());
+			pstat.setDate(8, orderBean.getCreateTime()); // CREATE_TIME
+			pstat.setDate(9, orderBean.getUpdateTime()); // UPDATE_TIME
 
 			pstat.execute();
 		} finally {

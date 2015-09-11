@@ -232,6 +232,85 @@
         )
     ]]></sql>        
     
-    
+	<sql name="INSERT_PRODUCT"><![CDATA[
+		INSERT INTO ORDER_PRODUCT (
+			PRODUCT_ID,
+			ORDER_ID,
+			PROD_CATEGORY_CLIENT,
+			PROD_FAMILY_CLIENT,
+			PROD_TYPE,
+			IS_RE_INSPECTION,
+			PRE_INSPECTION,
+			PRE_INSPECTION_DATE,
+			RE_INSPECTION_COMMENT,
+			PROD_NAME,
+			PROD_REFERENCE,
+			PROD_QUANTITY,
+			PROD_QUANTITY_UNIT,
+			OTHER_UNIT,
+			PO_NUMBER,
+			PROD_APPAREL_CATEGORY,
+			MAX_PCS_PER_MD,
+			MAX_REF_PER_MD,
+			EXPECTED_QUANTITY,
+			NB_OF_REF_IN_REPORT,
+			NUMBER_OF_REFERENCES,
+			BOOKING_TYPE,
+			CREATE_TIME,
+			UPDATE_TIME,				
+			PRODUCT_SEQ,
+			NB_OF_PCS_PER_SETS
+		) VALUES (
+			?,
+			?,
+			'bigCat6',
+			'bigCat6_s1',
+			?,
+			'No',
+			null,
+			null,
+			null,
+			?,
+			?,
+			?,
+			'pcs',
+			null,
+			?,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			'General',
+			?,
+			?,
+			1,
+			null
+		)
+	]]></sql> 
 
+    <sql name="INSERT_ORDER_MAN_DAY"><![CDATA[
+        INSERT INTO ORDER_MAN_DAY (
+            ORDER_ID,
+            CLIENT_MD,
+            SUPERVISOR_MD,
+            REAL_MD,
+            MD_STATUS,
+            CREATE_TIME,
+            UPDATE_TIME,
+            MORE_ITEMS,
+            MDP_LOG_TOTAL
+        ) VALUES (
+            ?,
+            ?,
+            ?,          
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?
+        )
+    ]]></sql>   
 </sql-config>

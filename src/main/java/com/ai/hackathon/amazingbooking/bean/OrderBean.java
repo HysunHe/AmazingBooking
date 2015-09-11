@@ -74,6 +74,7 @@ public class OrderBean implements Serializable {
 	private java.sql.Date updateTime;
 
 	private String custId;
+	private String prodId;
 
 	public String getClientRefNb() {
 		return clientRefNb;
@@ -368,6 +369,21 @@ public class OrderBean implements Serializable {
 	 */
 	public void setCustId(String custId) {
 		this.custId = custId;
+	}
+
+	/**
+	 * @return the prodId
+	 */
+	public String getProdId() {
+		return prodId;
+	}
+
+	/**
+	 * @param prodId
+	 *            the prodId to set
+	 */
+	public void setProdId(String prodId) {
+		this.prodId = prodId;
 	}
 
 	/*

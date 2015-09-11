@@ -38,6 +38,7 @@ public final class Consts {
 	public static final String INSERT_ORDER_GENERAL_INFO = "INSERT_ORDER_GENERAL_INFO";
 	public static final String INSERT_ORDER_EXT_FIELDS = "INSERT_ORDER_EXT_FIELDS";
 	public static final String INSERT_ORDER_FACTORY = "INSERT_ORDER_FACTORY";
+	public static final String INSERT_PRODUCT = "INSERT_PRODUCT";
 	
 
 	public enum OrderField {
