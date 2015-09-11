@@ -19,6 +19,7 @@ import java.util.Random;
 import com.ai.commons.DateUtils;
 import com.ai.commons.IDGenerator;
 import com.ai.commons.SqlConfigLoader;
+import com.ai.commons.StringUtils;
 import com.ai.hackathon.amazingbooking.bean.OrderBean;
 import com.ai.hackathon.amazingbooking.consts.Consts;
 import com.ai.hackathon.amazingbooking.utils.DBUtil;
@@ -91,59 +92,59 @@ public class OrderDao {
 	private void saveOrderGeneralInfo(Connection conn, OrderBean orderBean)
 			throws SQLException {
 		PreparedStatement pstat = null;
+		
+		int i = 1;
 
 		try {
 			pstat = conn.prepareStatement(SqlConfigLoader
 					.findSql(Consts.INSERT_ORDER_GENERAL_INFO));
-			pstat.setString(1, null); // STATUS
-			pstat.setString(2, orderBean.getOrderNo()); // ORDER_NUMBER
-			pstat.setString(3, orderBean.getClientRefNb()); // CLIENT_REF_NB
-			pstat.setString(4, null); // ORDER_PLACER
-			pstat.setDate(5, null); // BOOKING_DATE
-			pstat.setString(6, null); // SIC
-			pstat.setString(7, null); // SERVICE_TYPE
-			pstat.setString(8, null); // PROD_CATEGORY_AI
-			pstat.setString(9, null); // PROD_FAMILY_AI
-			pstat.setString(10, null); // PROD_CATEGORY_CLIENT
-			pstat.setString(11, null); // PROD_FAMILY_CLIENT
-			pstat.setString(12, null); // TOOLS
-			pstat.setString(13, null); // PROJECT_LEADER
-			pstat.setString(14, null); // PROTO_SUPERVISOR
-			pstat.setString(15, null); // PROTO_SUPERVISOR_2
-			pstat.setString(16, null); // REPORT_APPROVER
-			pstat.setString(17, null); // ITL_MANAGER
-			pstat.setString(18, null); // DEDICATED_INSPECTOR
-			pstat.setString(19, null); // BOOK_FROM_PRE_ORDER
-			pstat.setString(20, null); // INSPECTION_RATING
-			pstat.setString(21, null); // RATING_COMMENTS
-			pstat.setString(22, null); // IC_NEEDED
-			pstat.setString(23, null); // LC_NUMBER
-			pstat.setString(24, null); // LC_APP_NAME
-			pstat.setString(25, null); // LC_APP_ADDRESS
-			pstat.setString(26, null); // LC_BENE_NAME
-			pstat.setString(27, null); // LC_BENE_ADDRESS
-			pstat.setDate(28, new Date(orderBean.getExpectedInspDate()
-					.getTime())); // EXPECTED_INSP_DATE
-			pstat.setDate(29, null); // ACTUAL_INSP_DATE
-			pstat.setDate(29, new Date(orderBean.getExpectedShipDate()
-					.getTime())); // EXPECTED_SHIP_DATE
-			pstat.setString(30, null); // COPY_ALL_MAIL_TO
-			pstat.setString(31, null); // COPY_REPORT_MAIL_TO
-			pstat.setString(32, null); // CONTAINER20
-			pstat.setString(33, null); // CONTAINER40
-			pstat.setString(34, null); // CONTAINER40HQ
-			pstat.setDate(35, orderBean.getCreateTime()); // CREATE_TIME
-			pstat.setDate(36, orderBean.getUpdateTime()); // UPDATE_TIME
-			pstat.setString(37, orderBean.getOrderId()); // ORDER_ID
-			pstat.setString(38, null); // CALLED_INSPECTOR
-			pstat.setString(39, null); // INSEPCTOR_CALLED_BY
-			pstat.setString(40, null); // INSEPCTOR_CALL_RESULT
-			pstat.setString(41, null); // INSEPCTOR_CALL_COMMENTS
-			pstat.setString(42, null); // CALLED_FACTORY
-			pstat.setString(43, null); // FACTORY_CALLED_BY
-			pstat.setString(44, null); // FACTORY_CALL_RESULT
-			pstat.setString(45, null); // FACTORY_CALL_COMMENTS
-			pstat.setString(46, null); // CUST_ID
+			pstat.setString(i++, StringUtils.EMPTY); // STATUS
+			pstat.setString(i++, orderBean.getOrderNo()); // ORDER_NUMBER
+			pstat.setString(i++, orderBean.getClientRefNb()); // CLIENT_REF_NB
+			pstat.setString(i++, StringUtils.EMPTY); // ORDER_PLACER
+			pstat.setNull(i++,  java.sql.Types.DATE); // BOOKING_DATE
+			pstat.setString(i++, StringUtils.EMPTY); // SIC
+			pstat.setString(i++, StringUtils.EMPTY); // SERVICE_TYPE
+			pstat.setString(i++, StringUtils.EMPTY); // PROD_CATEGORY_AI
+			pstat.setString(i++, StringUtils.EMPTY); // PROD_FAMILY_AI
+			pstat.setString(i++, StringUtils.EMPTY); // PROD_CATEGORY_CLIENT
+			pstat.setString(i++, StringUtils.EMPTY); // PROD_FAMILY_CLIENT
+			pstat.setString(i++, StringUtils.EMPTY); // TOOLS
+			pstat.setString(i++, StringUtils.EMPTY); // PROJECT_LEADER
+			pstat.setString(i++, StringUtils.EMPTY); // PROTO_SUPERVISOR
+			pstat.setString(i++, StringUtils.EMPTY); // PROTO_SUPERVISOR_2
+			pstat.setString(i++, StringUtils.EMPTY); // REPORT_APPROVER
+			pstat.setString(i++, StringUtils.EMPTY); // ITL_MANAGER
+			pstat.setString(i++, StringUtils.EMPTY); // DEDICATED_INSPECTOR
+			pstat.setString(i++, StringUtils.EMPTY); // BOOK_FROM_PRE_ORDER
+			pstat.setString(i++, StringUtils.EMPTY); // INSPECTION_RATING
+			pstat.setString(i++, StringUtils.EMPTY); // RATING_COMMENTS
+			pstat.setString(i++, StringUtils.EMPTY); // IC_NEEDED
+			pstat.setString(i++, StringUtils.EMPTY); // LC_NUMBER
+			pstat.setString(i++, StringUtils.EMPTY); // LC_APP_NAME
+			pstat.setString(i++, StringUtils.EMPTY); // LC_APP_ADDRESS
+			pstat.setString(i++, StringUtils.EMPTY); // LC_BENE_NAME
+			pstat.setString(i++, StringUtils.EMPTY); // LC_BENE_ADDRESS
+			pstat.setDate(i++, new Date(orderBean.getExpectedInspDate().getTime())); // EXPECTED_INSP_DATE
+			pstat.setNull(i++,  java.sql.Types.DATE); // ACTUAL_INSP_DATE
+			pstat.setDate(i++, new Date(orderBean.getExpectedShipDate().getTime())); // EXPECTED_SHIP_DATE
+			pstat.setString(i++, StringUtils.EMPTY); // COPY_ALL_MAIL_TO
+			pstat.setString(i++, StringUtils.EMPTY); // COPY_REPORT_MAIL_TO
+			pstat.setString(i++, StringUtils.EMPTY); // CONTAINER20
+			pstat.setString(i++, StringUtils.EMPTY); // CONTAINER40
+			pstat.setString(i++, StringUtils.EMPTY); // CONTAINER40HQ
+			pstat.setDate(i++, orderBean.getCreateTime()); // CREATE_TIME
+			pstat.setDate(i++, orderBean.getUpdateTime()); // UPDATE_TIME
+			pstat.setString(i++, orderBean.getOrderId()); // ORDER_ID
+			pstat.setString(i++, StringUtils.EMPTY); // CALLED_INSPECTOR
+			pstat.setString(i++, StringUtils.EMPTY); // INSEPCTOR_CALLED_BY
+			pstat.setString(i++, StringUtils.EMPTY); // INSEPCTOR_CALL_RESULT
+			pstat.setString(i++, StringUtils.EMPTY); // INSEPCTOR_CALL_COMMENTS
+			pstat.setString(i++, StringUtils.EMPTY); // CALLED_FACTORY
+			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_CALLED_BY
+			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_CALL_RESULT
+			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_CALL_COMMENTS
+			pstat.setString(i++, StringUtils.EMPTY); // CUST_ID
 
 			pstat.execute();
 		} finally {
@@ -154,41 +155,43 @@ public class OrderDao {
 	private void saveOrderExtFields(Connection conn, OrderBean orderBean)
 			throws SQLException {
 		PreparedStatement pstat = null;
+		
+		int i = 1;
 
 		try {
 			pstat = conn.prepareStatement(SqlConfigLoader
 					.findSql(Consts.INSERT_ORDER_EXT_FIELDS));
-			pstat.setString(1, orderBean.getOrderId()); // ORDER_ID
-			pstat.setString(2, null); // PRODUCT_ID_LIST
-			pstat.setString(3, null); // IS_RE_INSPECTION
-			pstat.setString(4, null); // ORIGINAL_NB_REINSP
-			pstat.setString(5, null); // IS_SPLIT_FROM
-			pstat.setString(6, null); // ORIGINAL_NB_SPLIT
-			pstat.setString(7, null); // IS_SPLIT_TO
-			pstat.setString(8, null); // NEW_NB_SPLIT
-			pstat.setDate(9, null); // FREEZE_DATE
-			pstat.setString(10, null); // POSTPONE_4PM
-			pstat.setString(11, null); // IS_NEW_SUPPLIER
-			pstat.setString(12, null); // IS_NEW_FIRST
-			pstat.setString(13, null); // IS_INSP_DEDICATED
-			pstat.setString(14, null); // AI_CANCELSON_REASON
-			pstat.setString(15, null); // SAMPLE_SIZE_TOTAL
-			pstat.setString(16, null); // IS_ASK_MORE_INFO
-			pstat.setString(17, null); // ORIGINAL_SIC
-			pstat.setString(18, null); // APPROVE_REFERENCES
-			pstat.setString(19, null); // ASK_NUMBER_OF_REFERENCES
-			pstat.setDate(20, orderBean.getCreateTime()); // CREATE_TIME
-			pstat.setDate(21, orderBean.getUpdateTime()); // UPDATE_TIME
-			pstat.setString(22, null); // CANCELLED_BY
-			pstat.setDate(23, null); // CANCELLATION_DATE
-			pstat.setString(24, null); // RFQ_NUMBER
-			pstat.setString(25, null); // IRP_STATUS
-			pstat.setString(26, null); // CFM_BY_PHONE_BY
-			pstat.setString(27, null); // CFM_BY_PHONE_PHONENB
-			pstat.setDate(28, null); // LAST_FREEZE_TIME
-			pstat.setString(29, null); // SHIPPED_SIGN
-			pstat.setString(30, null); // INSP_DATE_CONFIRMED_BY
-			pstat.setDate(31, null); // NB_OF_UPDATE_INSP_DATE
+			pstat.setString(i++, orderBean.getOrderId()); // ORDER_ID
+			pstat.setString(i++, StringUtils.EMPTY); // PRODUCT_ID_LIST
+			pstat.setString(i++, StringUtils.EMPTY); // IS_RE_INSPECTION
+			pstat.setString(i++, StringUtils.EMPTY); // ORIGINAL_NB_REINSP
+			pstat.setString(i++, StringUtils.EMPTY); // IS_SPLIT_FROM
+			pstat.setString(i++, StringUtils.EMPTY); // ORIGINAL_NB_SPLIT
+			pstat.setString(i++, StringUtils.EMPTY); // IS_SPLIT_TO
+			pstat.setString(i++, StringUtils.EMPTY); // NEW_NB_SPLIT
+			pstat.setNull(i++,  java.sql.Types.DATE); // FREEZE_DATE
+			pstat.setString(i++, StringUtils.EMPTY); // POSTPONE_4PM
+			pstat.setString(i++, StringUtils.EMPTY); // IS_NEW_SUPPLIER
+			pstat.setString(i++, StringUtils.EMPTY); // IS_NEW_FIRST
+			pstat.setString(i++, StringUtils.EMPTY); // IS_INSP_DEDICATED
+			pstat.setString(i++, StringUtils.EMPTY); // AI_CANCELSON_REASON
+			pstat.setString(i++, StringUtils.EMPTY); // SAMPLE_SIZE_TOTAL
+			pstat.setString(i++, StringUtils.EMPTY); // IS_ASK_MORE_INFO
+			pstat.setString(i++, StringUtils.EMPTY); // ORIGINAL_SIC
+			pstat.setString(i++, StringUtils.EMPTY); // APPROVE_REFERENCES
+			pstat.setString(i++, StringUtils.EMPTY); // ASK_NUMBER_OF_REFERENCES
+			pstat.setDate(i++, orderBean.getCreateTime()); // CREATE_TIME
+			pstat.setDate(i++, orderBean.getUpdateTime()); // UPDATE_TIME
+			pstat.setString(i++, StringUtils.EMPTY); // CANCELLED_BY
+			pstat.setNull(i++,  java.sql.Types.DATE); // CANCELLATION_DATE
+			pstat.setString(i++, StringUtils.EMPTY); // RFQ_NUMBER
+			pstat.setString(i++, StringUtils.EMPTY); // IRP_STATUS
+			pstat.setString(i++, StringUtils.EMPTY); // CFM_BY_PHONE_BY
+			pstat.setString(i++, StringUtils.EMPTY); // CFM_BY_PHONE_PHONENB
+			pstat.setNull(i++,  java.sql.Types.DATE); // LAST_FREEZE_TIME
+			pstat.setString(i++, StringUtils.EMPTY); // SHIPPED_SIGN
+			pstat.setString(i++, StringUtils.EMPTY); // INSP_DATE_CONFIRMED_BY
+			pstat.setNull(i++,  java.sql.Types.DATE); // NB_OF_UPDATE_INSP_DATE
 
 			pstat.execute();
 		} finally {
@@ -199,38 +202,40 @@ public class OrderDao {
 	private void saveOrderFactory(Connection conn, OrderBean orderBean)
 			throws SQLException {
 		PreparedStatement pstat = null;
+		
+		int i = 1;
 
 		try {
 			pstat = conn.prepareStatement(SqlConfigLoader
 					.findSql(Consts.INSERT_ORDER_FACTORY));
-			pstat.setString(1, orderBean.getOrderId()); // ORDER_ID
-			pstat.setString(2, orderBean.getVendorName()); // FACTORY_NAME
-			pstat.setString(3, null); // FACTORY_NAME_CN
-			pstat.setString(4, orderBean.getSupplierMgrName()); // FACTORY_MGR_NAME
-			pstat.setString(5, orderBean.getSupplierMgrMobile()); // FACTORY_MGR_MOBILE
-			pstat.setString(6, orderBean.getSupplierMgrNumber()); // FACTORY_MGR_NUMBER
-			pstat.setString(7, orderBean.getSupplierMgrEmail()); // FACTORY_MGR_EMAIL
-			pstat.setString(8, null); // FACTORY_OTHER_NAME
-			pstat.setString(9, null); // FACTORY_OTHER_MOBILE
-			pstat.setString(10, null); // FACTORY_OTHER_NUMBER
-			pstat.setString(11, null); // FACTORY_OTHER_EMAIL
-			pstat.setString(12, orderBean.getSupplierAddress()); // FACTORY_ADDRESS
-			pstat.setString(13, orderBean.getSupplierCity()); // FACTORY_CITY
-			pstat.setString(14, null); // FACTORY_PROVINCE
-			pstat.setString(15, orderBean.getSupplierCountry()); // FACTORY_COUNTRY
-			pstat.setString(16, null); // FACTORY_CONTINENT
-			pstat.setString(17, null); // FACTORY_POSTCODE
-			pstat.setString(18, null); // FACTORY_PRODUCTLINES
-			pstat.setString(19, null); // DEPARTURE_CITY
-			pstat.setDate(20, null); // ARRIVAL_TIME
-			pstat.setString(21, null); // FACTORY_AI_OFFICE
-			pstat.setString(22, null); // NB_OF_WORKERS
-			pstat.setString(23, null); // COMMENTS
-			pstat.setString(24, null); // COORDINATION_REMARK
-			pstat.setString(25, null); // IS_MUTI_LOCATION
-			pstat.setDate(25, orderBean.getCreateTime()); // CREATE_TIME
-			pstat.setDate(26, orderBean.getUpdateTime()); // UPDATE_TIME
-			pstat.setString(27, null); // FACTORY_ID
+			pstat.setString(i++, orderBean.getOrderId()); // ORDER_ID
+			pstat.setString(i++, orderBean.getVendorName()); // FACTORY_NAME
+			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_NAME_CN
+			pstat.setString(i++, orderBean.getSupplierMgrName()); // FACTORY_MGR_NAME
+			pstat.setString(i++, orderBean.getSupplierMgrMobile()); // FACTORY_MGR_MOBILE
+			pstat.setString(i++, orderBean.getSupplierMgrNumber()); // FACTORY_MGR_NUMBER
+			pstat.setString(i++, orderBean.getSupplierMgrEmail()); // FACTORY_MGR_EMAIL
+			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_OTHER_NAME
+			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_OTHER_MOBILE
+			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_OTHER_NUMBER
+			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_OTHER_EMAIL
+			pstat.setString(i++, orderBean.getSupplierAddress()); // FACTORY_ADDRESS
+			pstat.setString(i++, orderBean.getSupplierCity()); // FACTORY_CITY
+			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_PROVINCE
+			pstat.setString(i++, orderBean.getSupplierCountry()); // FACTORY_COUNTRY
+			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_CONTINENT
+			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_POSTCODE
+			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_PRODUCTLINES
+			pstat.setString(i++, StringUtils.EMPTY); // DEPARTURE_CITY
+			pstat.setNull(i++,  java.sql.Types.DATE); // ARRIVAL_TIME
+			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_AI_OFFICE
+			pstat.setString(i++, StringUtils.EMPTY); // NB_OF_WORKERS
+			pstat.setString(i++, StringUtils.EMPTY); // COMMENTS
+			pstat.setString(i++, StringUtils.EMPTY); // COORDINATION_REMARK
+			pstat.setString(i++, StringUtils.EMPTY); // IS_MUTI_LOCATION
+			pstat.setDate(i++, orderBean.getCreateTime()); // CREATE_TIME
+			pstat.setDate(i++, orderBean.getUpdateTime()); // UPDATE_TIME
+			pstat.setString(i++, StringUtils.EMPTY); // FACTORY_ID
 
 			pstat.execute();
 		} finally {
@@ -302,14 +307,14 @@ public class OrderDao {
             pstat = conn.prepareStatement(SqlConfigLoader
                     .findSql(Consts.INSERT_ORDER_MAN_DAY));
             pstat.setString(1, orderBean.getOrderId()); // ORDER_ID
-            pstat.setString(2, null); // CLIENT_MD
-            pstat.setString(3, null); // SUPERVISOR_MD
-            pstat.setString(4, null); // REAL_MD
-            pstat.setString(5, null); // MD_STATUS
-            pstat.setDate(6, null); // CREATE_TIME
-            pstat.setDate(7, null); // UPDATE_TIME
-            pstat.setString(8, null); // MORE_ITEMS
-            pstat.setString(9, null); // MDP_LOG_TOTAL
+            pstat.setString(2, StringUtils.EMPTY); // CLIENT_MD
+            pstat.setString(3, StringUtils.EMPTY); // SUPERVISOR_MD
+            pstat.setString(4, StringUtils.EMPTY); // REAL_MD
+            pstat.setString(5, StringUtils.EMPTY); // MD_STATUS
+            pstat.setDate(6, orderBean.getCreateTime()); // CREATE_TIME
+            pstat.setDate(7, orderBean.getUpdateTime()); // UPDATE_TIME
+            pstat.setString(8, StringUtils.EMPTY); // MORE_ITEMS
+            pstat.setString(9, StringUtils.EMPTY); // MDP_LOG_TOTAL
             
             pstat.execute();
         } finally {
@@ -325,18 +330,18 @@ public class OrderDao {
             pstat = conn.prepareStatement(SqlConfigLoader
                     .findSql(Consts.INSERT_ORDER_CHARGE));
             pstat.setString(1, orderBean.getOrderId()); // ORDER_ID
-            pstat.setString(2, null); // MD_RATE
-            pstat.setString(3, null); // NB_OF_EXTRA_REPORT
-            pstat.setString(4, null); // EXTRA_REPORT_RATE
-            pstat.setString(5, null); // EXPRESS_BOOKING_RATE
-            pstat.setString(6, null); // EXPRESS_BOOKING_FEE
-            pstat.setString(7, null); // SAMPLE_RATE
-            pstat.setString(8, null); // CLIENT_TYPE
-            pstat.setString(9, null); // INSPECTION_CHARGE
-            pstat.setString(10, null); // EXTRA_REPORT_CHARGE
-            pstat.setString(11, null); // SAMPLE_CHARGE
-            pstat.setString(12, null); // OFFLINE_CHARGE
-            pstat.setString(13, null); // TOTAL_CHARGE
+            pstat.setString(2, StringUtils.EMPTY); // MD_RATE
+            pstat.setString(3, StringUtils.EMPTY); // NB_OF_EXTRA_REPORT
+            pstat.setString(4, StringUtils.EMPTY); // EXTRA_REPORT_RATE
+            pstat.setString(5, StringUtils.EMPTY); // EXPRESS_BOOKING_RATE
+            pstat.setString(6, StringUtils.EMPTY); // EXPRESS_BOOKING_FEE
+            pstat.setString(7, StringUtils.EMPTY); // SAMPLE_RATE
+            pstat.setString(8, StringUtils.EMPTY); // CLIENT_TYPE
+            pstat.setString(9, StringUtils.EMPTY); // INSPECTION_CHARGE
+            pstat.setString(10, StringUtils.EMPTY); // EXTRA_REPORT_CHARGE
+            pstat.setString(11, StringUtils.EMPTY); // SAMPLE_CHARGE
+            pstat.setString(12, StringUtils.EMPTY); // OFFLINE_CHARGE
+            pstat.setString(13, StringUtils.EMPTY); // TOTAL_CHARGE
             pstat.setDate(14, orderBean.getCreateTime()); // CREATE_TIME
             pstat.setDate(15, orderBean.getUpdateTime()); // UPDATE_TIME
             
