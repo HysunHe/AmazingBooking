@@ -143,7 +143,12 @@ public class POP3MailParser implements MailParser {
 	 * @throws Exception
 	 */
 	private String getSubject() throws Exception {
-		String subject = MimeUtility.decodeText(mimeMessage.getSubject());
+		String subject = null;
+		try {
+			MimeUtility.decodeText(mimeMessage.getSubject());
+		} catch (Exception e) {
+			System.err.println("Subject" + e);
+		}
 		return subject == null ? "" : subject;
 	}
 

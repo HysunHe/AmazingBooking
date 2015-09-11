@@ -32,7 +32,6 @@ import org.apache.commons.lang.StringUtils;
 import com.ai.consts.MailConstant;
 import com.ai.hackathon.amazingbooking.bean.MailContent;
 import com.ai.hackathon.amazingbooking.bean.OrderBean;
-import com.ai.hackathon.amazingbooking.consts.Consts;
 import com.ai.hackathon.amazingbooking.dao.OrderDao;
 import com.ai.hackathon.amazingbooking.parser.MailParser;
 import com.ai.hackathon.amazingbooking.parser.POP3MailParser;
@@ -107,14 +106,11 @@ public class Main {
 		for (int i = 0; i < messages.length; i++) {
 			MimeMessage mimeMessage = (MimeMessage) messages[i];
 			String subject = mimeMessage.getSubject();
-
+			System.out.println("* Find mail with subject: " + subject);
+			
 			MimeMessage copy = new MimeMessage(mimeMessage);
 			System.out.println("* Mark the mail as read: " + copy.getSubject());
 
-			if (subject == null
-					|| !subject.toUpperCase().contains(Consts.SUBJECT_KEYWORD)) {
-				continue;
-			}
 			MailParser mailParser = new POP3MailParser(mimeMessage, props);
 			MailContent mailObject = mailParser.parse();
 			if (mailObject != null) {
@@ -193,25 +189,24 @@ public class Main {
 	private static OrderBean placeOrder(Properties props, MailContent origMail)
 			throws IOException, SQLException {
 		String[] attachments = origMail.getAttachments();
-		
-		
-        String fileName = com.ai.commons.StringUtils.EMPTY;
-        for (String attachment : attachments) {
-            if (com.ai.commons.StringUtils.isBlank(attachment)) {
-                continue;
-            }
 
-            fileName = attachment.toUpperCase();
+		String fileName = com.ai.commons.StringUtils.EMPTY;
+		for (String attachment : attachments) {
+			if (com.ai.commons.StringUtils.isBlank(attachment)) {
+				continue;
+			}
 
-            if (com.ai.commons.StringUtils.endsWith(fileName, ".XLSX")
-                    && com.ai.commons.StringUtils.contains(fileName,
-                            "QUICK BOOKING")) {
-                fileName = attachment;
-                break;
-            }
-        }
-        
-        InputStream is = new FileInputStream(fileName);
+			fileName = attachment.toUpperCase();
+
+			if (com.ai.commons.StringUtils.endsWith(fileName, ".XLSX")
+					&& com.ai.commons.StringUtils.contains(fileName,
+							"QUICK BOOKING")) {
+				fileName = attachment;
+				break;
+			}
+		}
+
+		InputStream is = new FileInputStream(fileName);
 		OrderBean orderBean = OrderUtils.toOrderBean(is);
 
 		System.out.println("* Got javabean: " + orderBean);
