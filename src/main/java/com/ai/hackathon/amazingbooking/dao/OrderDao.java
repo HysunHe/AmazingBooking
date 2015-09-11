@@ -102,7 +102,7 @@ public class OrderDao {
 			pstat.setString(i++, orderBean.getOrderNo()); // ORDER_NUMBER
 			pstat.setString(i++, orderBean.getClientRefNb()); // CLIENT_REF_NB
 			pstat.setString(i++, StringUtils.EMPTY); // ORDER_PLACER
-			pstat.setNull(i++,  java.sql.Types.DATE); // BOOKING_DATE
+			pstat.setDate(i++, new Date(orderBean.getCreateTime().getTime())); // BOOKING_DATE
 			pstat.setString(i++, StringUtils.EMPTY); // SIC
 			pstat.setString(i++, StringUtils.EMPTY); // SERVICE_TYPE
 			pstat.setString(i++, StringUtils.EMPTY); // PROD_CATEGORY_AI
@@ -191,7 +191,7 @@ public class OrderDao {
 			pstat.setNull(i++,  java.sql.Types.DATE); // LAST_FREEZE_TIME
 			pstat.setString(i++, StringUtils.EMPTY); // SHIPPED_SIGN
 			pstat.setString(i++, StringUtils.EMPTY); // INSP_DATE_CONFIRMED_BY
-			pstat.setNull(i++,  java.sql.Types.DATE); // NB_OF_UPDATE_INSP_DATE
+			pstat.setNull(i++,  java.sql.Types.NUMERIC); // NB_OF_UPDATE_INSP_DATE
 
 			pstat.execute();
 		} finally {
@@ -292,7 +292,7 @@ public class OrderDao {
 			pstat.setString(7, orderBean.getSupplierCity());
 			pstat.setDate(8, orderBean.getCreateTime()); // CREATE_TIME
 			pstat.setDate(9, orderBean.getUpdateTime()); // UPDATE_TIME
-			pstat.setString(10, IDGenerator.uuid());
+			pstat.setString(10, "A906287D40D96691482572E50047E3E2");
 			pstat.execute();
 		} finally {
 			DBUtil.close(pstat);
