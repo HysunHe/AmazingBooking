@@ -107,6 +107,10 @@ public class Main {
 		for (int i = 0; i < messages.length; i++) {
 			MimeMessage mimeMessage = (MimeMessage) messages[i];
 			String subject = mimeMessage.getSubject();
+			
+			MimeMessage copy = new MimeMessage(mimeMessage);
+			System.out.println("* Mark the mail as read: " + copy.getSubject());
+			
 			if (subject == null
 					|| !subject.toUpperCase().contains(Consts.SUBJECT_KEYWORD)) {
 				continue;
@@ -117,8 +121,6 @@ public class Main {
 				mails.add(mailObject);
 				System.out.println("* Got mail: " + mailObject);
 			}
-			MimeMessage copy = new MimeMessage(mimeMessage);
-			System.out.println("* Mark the mail as read: " + copy.getSubject());
 		}
 		inbox.close(false);
 		store.close();

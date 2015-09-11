@@ -74,11 +74,12 @@ public class OrderDao {
             saveOrderManDay(conn, orderBean);
             
             saveOrderCharge(conn, orderBean);			
+
+            conn.commit();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			conn.rollback();
 		} finally {
-			conn.commit();
-
 			conn.setAutoCommit(autoCommit);
 
 			DBUtil.close(conn);
