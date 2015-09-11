@@ -186,7 +186,9 @@ public class Main {
 		OrderBean orderBean = OrderUtils.toOrderBean(is);
 
 		OrderDao orderDao = new OrderDao();
-		orderNo = orderDao.save(orderBean);
+		orderBean = orderDao.save(orderBean);
+		
+		orderNo = orderBean.getOrderNo();
 
 		return orderNo;
 	}

@@ -7,42 +7,49 @@
  *
  ***************************************************************************/
 
-package com.ai.hackathon.amazingbooking.utils;
+package com.ai.hackathon.amazingbooking.dao;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import org.junit.Test;
 
 import com.ai.hackathon.amazingbooking.bean.OrderBean;
+import com.ai.hackathon.amazingbooking.utils.OrderUtils;
 
 /***************************************************************************
  *<PRE>
  *  Project Name    : amazing-booking
  * 
- *  Package Name    : com.ai.hackathon.amazingbooking.utils
+ *  Package Name    : com.ai.hackathon.amazingbooking.dao
  * 
- *  File Name       : OrderUtilsTest.java
+ *  File Name       : OrderDaoTest.java
  * 
- *  Creation Date   : Sep 10, 2015
+ *  Creation Date   : Sep 11, 2015
  * 
  *  Author          : Alva Xie
  * 
- *  Purpose         : Order Utils Test
+ *  Purpose         : OrderDaoTest
  * 
  * 
  *  History         : TODO
  * 
  *</PRE>
  ***************************************************************************/
-public class OrderUtilsTest {
+
+public class OrderDaoTest {
     
     private String fileName = "C:/Users/Administrator/git/AmazingBooking/Quick Booking-V1.1.xlsx";
-
+    
     @Test
-    public void testToOrderBean() throws IOException {
+    public void testSave() throws IOException, SQLException {
         FileInputStream fis = new FileInputStream(fileName);
         OrderBean orderBean = OrderUtils.toOrderBean(fis);
+        
+        OrderDao orderDao = new OrderDao();
+        orderBean = orderDao.save(orderBean);
+        
         System.out.println(orderBean);
     }
 

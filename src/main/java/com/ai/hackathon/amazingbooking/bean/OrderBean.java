@@ -68,6 +68,11 @@ public class OrderBean implements Serializable {
     private String collectProdSample;
     private String collectProdSampleComments;
     
+    private String orderId;
+    private String orderNo;
+    private java.sql.Date createTime;
+    private java.sql.Date updateTime;
+    
     public String getClientRefNb() {
         return clientRefNb;
     }
@@ -316,6 +321,40 @@ public class OrderBean implements Serializable {
         this.collectProdSampleComments = collectProdSampleComments;
     }
     
+    
+    
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public java.sql.Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(java.sql.Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public java.sql.Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(java.sql.Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
     @Override
     public String toString() {
         return "OrderBean [clientRefNb=" + clientRefNb + ", expectedInspDate="
@@ -340,6 +379,8 @@ public class OrderBean implements Serializable {
                 + ", collectLtSampleComments=" + collectLtSampleComments
                 + ", collectProdSample=" + collectProdSample
                 + ", collectProdSampleComments=" + collectProdSampleComments
+                + ", orderId=" + orderId + ", orderNo=" + orderNo
+                + ", createTime=" + createTime + ", updateTime=" + updateTime
                 + "]";
     }
 
