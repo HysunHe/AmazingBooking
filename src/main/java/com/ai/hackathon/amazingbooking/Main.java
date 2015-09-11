@@ -38,8 +38,6 @@ import com.ai.hackathon.amazingbooking.parser.MailParser;
 import com.ai.hackathon.amazingbooking.parser.POP3MailParser;
 import com.ai.hackathon.amazingbooking.utils.OrderUtils;
 import com.ai.hackathon.amazingbooking.utils.ServiceCallUtil;
-import com.ai.userservice.common.bean.ServiceCallResult;
-import com.ai.userservice.common.util.HttpUtil;
 
 /***************************************************************************
  * <PRE>
@@ -173,7 +171,7 @@ public class Main {
 	 */
 	private static void updatePriceInfo(Properties props, OrderBean orderBean) {
 		final String psiService = props.getProperty("inspection.service.url");
-		String orderId = null; // TODO
+		String orderId = orderBean.getOrderId();
 
 		final String url = psiService
 				+ "/order/mix/calculate-price/{orderId}".replace("{orderId}",
@@ -190,20 +188,18 @@ public class Main {
 	 * @throws IOException
 	 * @throws SQLException
 	 */
-	private static String placeOrder(MailContent origMail) throws IOException,
-			SQLException {
-		String orderNo = "TODO";
-
+	private static OrderBean placeOrder(Properties props, MailContent origMail)
+			throws IOException, SQLException {
 		String[] attachments = origMail.getAttachments();
 		InputStream is = new FileInputStream(attachments[0]);
 		OrderBean orderBean = OrderUtils.toOrderBean(is);
 
-		OrderDao orderDao = new OrderDao();
+		final OrderDao orderDao = new OrderDao();
 		orderBean = orderDao.save(orderBean);
-		
-		orderNo = orderBean.getOrderNo();
 
-		return orderNo;
+		// Update price info.
+		updatePriceInfo(props, orderBean);
+		return orderBean;
 	}
 
 	/**
@@ -222,10 +218,10 @@ public class Main {
 
 				for (MailContent mail : mails) {
 					// Generate an new order and add it to Oracle DB.
-					String orderNo = placeOrder(mail);
+					OrderBean orderBean = placeOrder(props, mail);
 
 					// Send notification mail to client.
-					sendSuccessMail(props, mail, orderNo);
+					sendSuccessMail(props, mail, orderBean.getOrderNo());
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
