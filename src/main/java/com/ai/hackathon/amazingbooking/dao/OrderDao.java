@@ -50,6 +50,7 @@ public class OrderDao {
 		orderBean.setOrderNo(generateOrderNo());
 		// Login: mabur
 		orderBean.setCustId("75EAA8F9E7834D39C125757A002E21AD");
+		orderBean.setProdId(IDGenerator.uuid());
 
 		Timestamp ts = DateUtils.currentSQLTimestamp();
 		Date date = new Date(ts.getTime());
@@ -258,7 +259,6 @@ public class OrderDao {
 	private void saveProduct(Connection conn, OrderBean orderBean)
 			throws SQLException {
 		PreparedStatement pstat = null;
-		orderBean.setProdId(IDGenerator.uuid());
 		try {
 			pstat = conn.prepareStatement(SqlConfigLoader
 					.findSql(Consts.INSERT_PRODUCT));
@@ -286,7 +286,6 @@ public class OrderDao {
 	private void saveSupplier(Connection conn, OrderBean orderBean)
 			throws SQLException {
 		PreparedStatement pstat = null;
-		orderBean.setProdId(IDGenerator.uuid());
 		try {
 			pstat = conn.prepareStatement(SqlConfigLoader
 					.findSql(Consts.INSERT_SUPPLIER));
@@ -314,7 +313,6 @@ public class OrderDao {
 	private void savePayment(Connection conn, OrderBean orderBean)
 			throws SQLException {
 		PreparedStatement pstat = null;
-		orderBean.setProdId(IDGenerator.uuid());
 		try {
 			pstat = conn.prepareStatement(SqlConfigLoader
 					.findSql(Consts.INSERT_PAYMNET));
@@ -335,7 +333,6 @@ public class OrderDao {
 	private void saveProdExt(Connection conn, OrderBean orderBean)
 			throws SQLException {
 		PreparedStatement pstat = null;
-		orderBean.setProdId(IDGenerator.uuid());
 		try {
 			pstat = conn.prepareStatement(SqlConfigLoader
 					.findSql(Consts.INSERT_PROD_EXT));
@@ -401,7 +398,7 @@ public class OrderDao {
 	}
 
 	private String generateOrderNo() {
-		String orderNo = "M-cn5-";
+		String orderNo = "M-cn-";
 
 		Random random = new Random();
 		int number = random.nextInt(9999999);
