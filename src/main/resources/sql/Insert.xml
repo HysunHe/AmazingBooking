@@ -289,6 +289,32 @@
 			null
 		)
 	]]></sql> 
+	
+	<sql name="INSERT_SUPPLIER"><![CDATA[
+		INSERT INTO ORDER_SUPPLIER (
+			ORDER_ID,
+			SUPPLIER_MGR_NAME,
+			SUPPLIER_MGR_MOBILE,
+			SUPPLIER_MGR_NUMBER,
+			SUPPLIER_MGR_EMAIL,
+			SUPPLIER_ADDRESS,
+			SUPPLIER_CITY,
+			CREATE_TIME,
+			UPDATE_TIME,
+			SUPPLIER_ID
+		) VALUES (
+			?,
+			?,
+			?,
+			?,
+			?,
+			?,
+			?,
+			?,
+			?,
+			?
+		)
+	]]></sql> 
 
     <sql name="INSERT_ORDER_MAN_DAY"><![CDATA[
         INSERT INTO ORDER_MAN_DAY (
