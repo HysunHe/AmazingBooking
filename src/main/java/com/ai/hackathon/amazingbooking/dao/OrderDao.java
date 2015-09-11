@@ -85,7 +85,7 @@ public class OrderDao {
 
 			saveOrderProdSample(conn, orderBean);
 
-			saveChecklist(conn, orderBean);
+			// saveChecklist(conn, orderBean);
 
 			conn.commit();
 		} catch (SQLException e) {
@@ -371,28 +371,28 @@ public class OrderDao {
 		}
 	}
 
-	/**
-	 * @param conn
-	 * @param orderBean
-	 * @throws SQLException
-	 */
-	private void saveChecklist(Connection conn, OrderBean orderBean)
-			throws SQLException {
-		PreparedStatement pstat = null;
-		try {
-			pstat = conn.prepareStatement(SqlConfigLoader
-					.findSql(Consts.INSERT_PROD_CKL));
-			pstat.setString(1, orderBean.getProdId());
-			pstat.setString(2, orderBean.getAqlCritical());
-			pstat.setString(3, orderBean.getAqlMajor());
-			pstat.setString(4, orderBean.getAqlMinor());
-			pstat.setDate(5, orderBean.getCreateTime()); // CREATE_TIME
-			pstat.setDate(6, orderBean.getUpdateTime()); // UPDATE_TIME
-			pstat.execute();
-		} finally {
-			DBUtil.close(pstat);
-		}
-	}
+	// /**
+	// * @param conn
+	// * @param orderBean
+	// * @throws SQLException
+	// */
+	// private void saveChecklist(Connection conn, OrderBean orderBean)
+	// throws SQLException {
+	// PreparedStatement pstat = null;
+	// try {
+	// pstat = conn.prepareStatement(SqlConfigLoader
+	// .findSql(Consts.INSERT_PROD_CKL));
+	// pstat.setString(1, orderBean.getProdId());
+	// pstat.setString(2, orderBean.getAqlCritical());
+	// pstat.setString(3, orderBean.getAqlMajor());
+	// pstat.setString(4, orderBean.getAqlMinor());
+	// pstat.setDate(5, orderBean.getCreateTime()); // CREATE_TIME
+	// pstat.setDate(6, orderBean.getUpdateTime()); // UPDATE_TIME
+	// pstat.execute();
+	// } finally {
+	// DBUtil.close(pstat);
+	// }
+	// }
 
 	private void saveOrderManDay(Connection conn, OrderBean orderBean)
 			throws SQLException {
