@@ -403,5 +403,18 @@
             ?          
         )
     ]]></sql>   
-            
+     
+	<sql name="INSERT_PROD_SPEC"><![CDATA[
+        INSERT INTO ORDER_PROD_SPEC (
+            PRODUCT_ID,
+            NB_OF_POINTS,
+            CREATE_TIME,
+            UPDATE_TIME
+        ) VALUES (
+            ?,
+            0, 
+            ?,
+            ?          
+        )
+    ]]></sql>         
 </sql-config>
