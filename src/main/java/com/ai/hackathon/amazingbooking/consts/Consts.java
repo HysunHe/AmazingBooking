@@ -40,6 +40,8 @@ public final class Consts {
 	public static final String INSERT_ORDER_FACTORY = "INSERT_ORDER_FACTORY";
 	public static final String INSERT_PRODUCT = "INSERT_PRODUCT";
 	public static final String INSERT_SUPPLIER = "INSERT_SUPPLIER";
+    public static final String INSERT_ORDER_MAN_DAY = "INSERT_ORDER_MAN_DAY";
+    public static final String INSERT_ORDER_CHARGE = "INSERT_ORDER_CHARGE";	
 	
 
 	public enum OrderField {

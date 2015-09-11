@@ -70,6 +70,10 @@ public class OrderDao {
 			saveProduct(conn, orderBean);
 			
 			saveSupplier(conn, orderBean);
+			
+            saveOrderManDay(conn, orderBean);
+            
+            saveOrderCharge(conn, orderBean);			
 		} catch (SQLException e) {
 			conn.rollback();
 		} finally {
@@ -288,6 +292,58 @@ public class OrderDao {
 			DBUtil.close(pstat);
 		}
 	}
+	
+    private void saveOrderManDay(Connection conn, OrderBean orderBean)
+            throws SQLException {
+        PreparedStatement pstat = null;
+
+        try {
+            pstat = conn.prepareStatement(SqlConfigLoader
+                    .findSql(Consts.INSERT_ORDER_MAN_DAY));
+            pstat.setString(1, orderBean.getOrderId()); // ORDER_ID
+            pstat.setString(2, null); // CLIENT_MD
+            pstat.setString(3, null); // SUPERVISOR_MD
+            pstat.setString(4, null); // REAL_MD
+            pstat.setString(5, null); // MD_STATUS
+            pstat.setDate(6, null); // CREATE_TIME
+            pstat.setDate(7, null); // UPDATE_TIME
+            pstat.setString(8, null); // MORE_ITEMS
+            pstat.setString(9, null); // MDP_LOG_TOTAL
+            
+            pstat.execute();
+        } finally {
+            DBUtil.close(pstat);
+        }
+    }
+    
+    private void saveOrderCharge(Connection conn, OrderBean orderBean)
+            throws SQLException {
+        PreparedStatement pstat = null;
+
+        try {
+            pstat = conn.prepareStatement(SqlConfigLoader
+                    .findSql(Consts.INSERT_ORDER_CHARGE));
+            pstat.setString(1, orderBean.getOrderId()); // ORDER_ID
+            pstat.setString(2, null); // MD_RATE
+            pstat.setString(3, null); // NB_OF_EXTRA_REPORT
+            pstat.setString(4, null); // EXTRA_REPORT_RATE
+            pstat.setString(5, null); // EXPRESS_BOOKING_RATE
+            pstat.setString(6, null); // EXPRESS_BOOKING_FEE
+            pstat.setString(7, null); // SAMPLE_RATE
+            pstat.setString(8, null); // CLIENT_TYPE
+            pstat.setString(9, null); // INSPECTION_CHARGE
+            pstat.setString(10, null); // EXTRA_REPORT_CHARGE
+            pstat.setString(11, null); // SAMPLE_CHARGE
+            pstat.setString(12, null); // OFFLINE_CHARGE
+            pstat.setString(13, null); // TOTAL_CHARGE
+            pstat.setDate(14, orderBean.getCreateTime()); // CREATE_TIME
+            pstat.setDate(15, orderBean.getUpdateTime()); // UPDATE_TIME
+            
+            pstat.execute();
+        } finally {
+            DBUtil.close(pstat);
+        }
+    }
 
 	private String generateOrderNo() {
 		String orderNo = "M-cn5-";

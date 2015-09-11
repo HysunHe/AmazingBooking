@@ -315,7 +315,7 @@
 			?
 		)
 	]]></sql> 
-
+   
     <sql name="INSERT_ORDER_MAN_DAY"><![CDATA[
         INSERT INTO ORDER_MAN_DAY (
             ORDER_ID,
@@ -338,5 +338,42 @@
             ?,
             ?
         )
-    ]]></sql>   
+    ]]></sql>    
+    
+    <sql name="INSERT_ORDER_CHARGE"><![CDATA[
+        INSERT INTO ORDER_CHARGE (
+            ORDER_ID,
+            MD_RATE,
+            NB_OF_EXTRA_REPORT,
+            EXTRA_REPORT_RATE,
+            EXPRESS_BOOKING_RATE,
+            EXPRESS_BOOKING_FEE,
+            SAMPLE_RATE,
+            CLIENT_TYPE,
+            INSPECTION_CHARGE,
+            EXTRA_REPORT_CHARGE,
+            SAMPLE_CHARGE,
+            OFFLINE_CHARGE,
+            TOTAL_CHARGE,
+            CREATE_TIME,
+            UPDATE_TIME
+        ) VALUES (
+            ?,
+            ?,
+            ?,            
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?            
+        )
+    ]]></sql>    
+        
 </sql-config>
