@@ -53,7 +53,7 @@ public final class ServiceCallUtil {
 			if (result.getStatusCode() == 200 || result.getStatusCode() == 202) {
 				responseString = result.getResponseString();
 			} else {
-				throw new IOException(result.toString());
+				System.err.println("ERROR: " + result + "; ACTION: " + url);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -78,7 +78,7 @@ public final class ServiceCallUtil {
 			if (200 == result.getStatusCode() || 202 == result.getStatusCode()) {
 				return true;
 			} else {
-				System.err.println("ERROR: " + result);
+				System.err.println("ERROR: " + result + "; ACTION: " + url);
 				return false;
 			}
 		} catch (IOException e) {
