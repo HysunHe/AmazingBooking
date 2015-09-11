@@ -107,10 +107,10 @@ public class Main {
 		for (int i = 0; i < messages.length; i++) {
 			MimeMessage mimeMessage = (MimeMessage) messages[i];
 			String subject = mimeMessage.getSubject();
-			
+
 			MimeMessage copy = new MimeMessage(mimeMessage);
 			System.out.println("* Mark the mail as read: " + copy.getSubject());
-			
+
 			if (subject == null
 					|| !subject.toUpperCase().contains(Consts.SUBJECT_KEYWORD)) {
 				continue;
@@ -195,6 +195,8 @@ public class Main {
 		String[] attachments = origMail.getAttachments();
 		InputStream is = new FileInputStream(attachments[0]);
 		OrderBean orderBean = OrderUtils.toOrderBean(is);
+
+		System.out.println("* Got javabean: " + orderBean);
 
 		final OrderDao orderDao = new OrderDao();
 		orderBean = orderDao.save(orderBean);

@@ -393,7 +393,31 @@ public class OrderBean implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "OrderBean [orderId=" + orderId + ", orderNo=" + orderNo
-				+ ", custId=" + custId + "]";
+		return "OrderBean [clientRefNb=" + clientRefNb + ", expectedInspDate="
+				+ expectedInspDate + ", expectedShipDate=" + expectedShipDate
+				+ ", vendorName=" + vendorName + ", supplierMgrName="
+				+ supplierMgrName + ", supplierMgrEmail=" + supplierMgrEmail
+				+ ", supplierMgrNumber=" + supplierMgrNumber
+				+ ", supplierMgrMobile=" + supplierMgrMobile
+				+ ", supplierAddress=" + supplierAddress + ", supplierCity="
+				+ supplierCity + ", supplierCountry=" + supplierCountry
+				+ ", prodName=" + prodName + ", prodType=" + prodType
+				+ ", prodQuantity=" + prodQuantity + ", prodReference="
+				+ prodReference + ", poNumber=" + poNumber
+				+ ", orderProdSample=" + orderProdSample
+				+ ", refSampleComments=" + refSampleComments + ", colorDes="
+				+ colorDes + ", dimensionDesc=" + dimensionDesc + ", logoDes="
+				+ logoDes + ", packingComments=" + packingComments
+				+ ", shippingMarks=" + shippingMarks + ", additionalComments="
+				+ additionalComments + ", aqlCritical=" + aqlCritical
+				+ ", aqlMajor=" + aqlMajor + ", aqlMinor=" + aqlMinor
+				+ ", collectLtSample=" + collectLtSample
+				+ ", collectLtSampleComments=" + collectLtSampleComments
+				+ ", collectProdSample=" + collectProdSample
+				+ ", collectProdSampleComments=" + collectProdSampleComments
+				+ ", orderId=" + orderId + ", orderNo=" + orderNo
+				+ ", createTime=" + createTime + ", updateTime=" + updateTime
+				+ ", custId=" + custId + ", prodId=" + prodId + "]";
 	}
+
 }
