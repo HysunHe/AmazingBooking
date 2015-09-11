@@ -375,5 +375,21 @@
             ?            
         )
     ]]></sql>    
-        
+
+    <sql name="INSERT_PAYMNET"><![CDATA[
+        INSERT INTO ORDER_PAYMENT (
+            ORDER_ID,
+            EXACT_PAYMENT_TOTAL,
+            ORDER_PAID,
+            CREATE_TIME,
+            UPDATE_TIME
+        ) VALUES (
+            ?,
+            0,
+            0,            
+            ?,
+            ?          
+        )
+    ]]></sql> 
+            
 </sql-config>
