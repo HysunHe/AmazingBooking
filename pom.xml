@@ -50,7 +50,7 @@
 		<ognl.version>2.6.9</ognl.version>
 		<cglib.version>2.2.2</cglib.version>
 
-		<common.version>1.4</common.version>
+		<common.version>1.4.3-SNAPSHOT</common.version>
 
 		<poi.version>3.12</poi.version>
 		<poi.ooxml.version>3.12</poi.ooxml.version>
