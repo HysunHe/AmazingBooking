@@ -43,6 +43,7 @@ public final class Consts {
     public static final String INSERT_ORDER_MAN_DAY = "INSERT_ORDER_MAN_DAY";
     public static final String INSERT_ORDER_CHARGE = "INSERT_ORDER_CHARGE";	
     public static final String INSERT_PAYMNET = "INSERT_PAYMNET";	
+    public static final String INSERT_PROD_EXT = "INSERT_PROD_EXT";	
 	
 
 	public enum OrderField {

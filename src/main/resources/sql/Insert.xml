@@ -391,5 +391,17 @@
             ?          
         )
     ]]></sql> 
+    
+     <sql name="INSERT_PROD_EXT"><![CDATA[
+        INSERT INTO ORDER_PROD_EXT_FIELDS (
+            PRODUCT_ID,
+            CREATE_TIME,
+            UPDATE_TIME
+        ) VALUES (
+            ?,            
+            ?,
+            ?          
+        )
+    ]]></sql>   
             
 </sql-config>

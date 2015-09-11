@@ -78,6 +78,8 @@ public class OrderDao {
 
 			savePayment(conn, orderBean);
 
+			saveProdExt(conn, orderBean);
+
 			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -317,6 +319,27 @@ public class OrderDao {
 			pstat = conn.prepareStatement(SqlConfigLoader
 					.findSql(Consts.INSERT_PAYMNET));
 			pstat.setString(1, orderBean.getOrderId());
+			pstat.setDate(2, orderBean.getCreateTime()); // CREATE_TIME
+			pstat.setDate(3, orderBean.getUpdateTime()); // UPDATE_TIME
+			pstat.execute();
+		} finally {
+			DBUtil.close(pstat);
+		}
+	}
+
+	/**
+	 * @param conn
+	 * @param orderBean
+	 * @throws SQLException
+	 */
+	private void saveProdExt(Connection conn, OrderBean orderBean)
+			throws SQLException {
+		PreparedStatement pstat = null;
+		orderBean.setProdId(IDGenerator.uuid());
+		try {
+			pstat = conn.prepareStatement(SqlConfigLoader
+					.findSql(Consts.INSERT_PROD_EXT));
+			pstat.setString(1, orderBean.getProdId());
 			pstat.setDate(2, orderBean.getCreateTime()); // CREATE_TIME
 			pstat.setDate(3, orderBean.getUpdateTime()); // UPDATE_TIME
 			pstat.execute();
