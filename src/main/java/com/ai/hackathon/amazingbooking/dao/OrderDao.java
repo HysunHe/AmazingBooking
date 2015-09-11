@@ -82,6 +82,8 @@ public class OrderDao {
 			saveProdExt(conn, orderBean);
 			
 			saveProdSpec(conn, orderBean);
+			
+			saveOrderProdSample(conn, orderBean);
 
 			conn.commit();
 		} catch (SQLException e) {
@@ -418,6 +420,42 @@ public class OrderDao {
 			DBUtil.close(pstat);
 		}
 	}
+	
+	private void saveOrderProdSample(Connection conn, OrderBean orderBean)
+            throws SQLException {
+        PreparedStatement pstat = null;
+        
+        int i = 1;
+
+        try {
+            pstat = conn.prepareStatement(SqlConfigLoader
+                    .findSql(Consts.INSERT_ORDER_PROD_SAMPLE));
+            pstat.setString(i++, "52FACB2E98EF328648257CBF0039B978"); // PRODUCT_ID
+            pstat.setString(i++, StringUtils.EMPTY); // REF_SAMPLE
+            pstat.setString(i++, orderBean.getCollectLtSample()); // COLLECT_LT_SAMPLE
+            pstat.setString(i++, orderBean.getCollectProdSample()); // COLLECT_PROD_SAMPLE
+            pstat.setString(i++, StringUtils.EMPTY); // LT_SAMPLE_REF_NB
+            pstat.setString(i++, StringUtils.EMPTY); // HOW_TO_COLLECT_PROD_SAMPLE
+            pstat.setString(i++, StringUtils.EMPTY); // PROD_SAMPLE_NB
+            pstat.setString(i++, StringUtils.EMPTY); // PROD_SAMPLE_UNIT
+            pstat.setString(i++, StringUtils.EMPTY); // PROD_SAMPLE_BY
+            pstat.setString(i++, StringUtils.EMPTY); // NB_OF_DEFECTIVE
+            pstat.setString(i++, StringUtils.EMPTY); // NB_OF_GOOD
+            pstat.setString(i++, orderBean.getCollectLtSampleComments()); // COLLECT_LT_SAMPLE_COMMENTS
+            pstat.setString(i++, orderBean.getCollectProdSampleComments()); // COLLECT_PROD_SAMPLE_COMMENTS
+            pstat.setString(i++, StringUtils.EMPTY); // PROD_SAMPLE_COURIER
+            pstat.setString(i++, StringUtils.EMPTY); // PROD_SAMPLE_TRACK_NB
+            pstat.setString(i++, StringUtils.EMPTY); // PROD_SAMPLE_ADD
+            pstat.setDate(i++, orderBean.getCreateTime()); // CREATE_TIME
+            pstat.setDate(i++, orderBean.getUpdateTime()); // UPDATE_TIME
+            pstat.setString(i++, StringUtils.EMPTY); // REF_SAMPLE_COMMENTS
+            
+
+            pstat.execute();
+        } finally {
+            DBUtil.close(pstat);
+        }
+    }
 
 	private String generateOrderNo() {
 		String orderNo = "M-cn-";

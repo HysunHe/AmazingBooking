@@ -417,4 +417,51 @@
             ?          
         )
     ]]></sql>         
+    
+    
+    <sql name="INSERT_ORDER_PROD_SAMPLE"><![CDATA[
+        INSERT INTO ORDER_PROD_SAMPLE (
+            PRODUCT_ID,
+            REF_SAMPLE,
+            COLLECT_LT_SAMPLE,
+            COLLECT_PROD_SAMPLE,
+            LT_SAMPLE_REF_NB,
+            HOW_TO_COLLECT_PROD_SAMPLE,
+            PROD_SAMPLE_NB,
+            PROD_SAMPLE_UNIT,
+            PROD_SAMPLE_BY,
+            NB_OF_DEFECTIVE,
+            NB_OF_GOOD,
+            COLLECT_LT_SAMPLE_COMMENTS,
+            COLLECT_PROD_SAMPLE_COMMENTS,
+            PROD_SAMPLE_COURIER,
+            PROD_SAMPLE_TRACK_NB,
+            PROD_SAMPLE_ADD,
+            CREATE_TIME,
+            UPDATE_TIME,
+            REF_SAMPLE_COMMENTS
+        ) VALUES (
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?,
+            ?
+        )
+    ]]></sql>         
+    
+    
 </sql-config>
