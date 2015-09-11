@@ -44,16 +44,16 @@
 		<c3p0.version>0.9.1.2</c3p0.version>
 
 		<jsoup.version>1.8.1</jsoup.version>
-		
+
 		<mybatis-spring.version>1.2.2</mybatis-spring.version>
 		<mybatis.version>3.2.3</mybatis.version>
 		<ognl.version>2.6.9</ognl.version>
 		<cglib.version>2.2.2</cglib.version>
-		
+
 		<common.version>1.4</common.version>
-        
-        <poi.version>3.12</poi.version>
-        <poi.ooxml.version>3.12</poi.ooxml.version>
+
+		<poi.version>3.12</poi.version>
+		<poi.ooxml.version>3.12</poi.ooxml.version>
 	</properties>
 
 	<dependencies>
@@ -71,14 +71,14 @@
 			<artifactId>c3p0</artifactId>
 			<version>${c3p0.version}</version>
 		</dependency>
-		
+
 		<!-- AICommon -->
 		<dependency>
 			<groupId>com.ai</groupId>
 			<artifactId>commons</artifactId>
 			<version>${common.version}</version>
 		</dependency>
-		
+
 		<!-- MyBatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -367,19 +367,19 @@
 			<version>${jsoup.version}</version>
 		</dependency>
 
-        <!-- poi -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>${poi.version}</version>
-        </dependency>
+		<!-- poi -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
 
-        <!-- poi-ooxml -->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>${poi.ooxml.version}</version>
-        </dependency>
+		<!-- poi-ooxml -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi.ooxml.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -393,6 +393,32 @@
 					<source>1.7</source>
 					<target>1.7</target>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<!-- descriptors> <descriptor>${basedir}/assembly.xml</descriptor> </descriptors -->
+					<archive>
+						<manifest>
+							<mainClass>com.ai.hackathon.amazingbooking.Main</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id> <!-- this is used for inheritance merges -->
+						<phase>package</phase> <!-- bind to the packaging phase -->
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 			<!-- Junit configuration for Maven -->
