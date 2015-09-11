@@ -455,7 +455,7 @@ public class OrderDao {
 		try {
 			pstat = conn.prepareStatement(SqlConfigLoader
 					.findSql(Consts.INSERT_ORDER_PROD_SAMPLE));
-			pstat.setString(i++, "52FACB2E98EF328648257CBF0039B978"); // PRODUCT_ID
+			pstat.setString(i++, orderBean.getProdId()); // PRODUCT_ID
 			pstat.setString(i++, StringUtils.EMPTY); // REF_SAMPLE
 			pstat.setString(i++, orderBean.getCollectLtSample()); // COLLECT_LT_SAMPLE
 			pstat.setString(i++, orderBean.getCollectProdSample()); // COLLECT_PROD_SAMPLE
